@@ -18,18 +18,31 @@
 //p2.Print();
 //Console.WriteLine(p2.Sum());
 //Console.WriteLine(p2.Max());
-Counter c1 = new Counter();//конструктор по умолчанию
-Console.WriteLine(c1.Count);
-c1.inc();
-c1.inc();
-c1.inc();
-c1.inc();
-Console.WriteLine(c1.Count);
-c1.dec();
-Console.WriteLine(c1.Count);
-Random randon = new Random();
-Counter c2 = new Counter(randon.Next(-10,11),-10,10);
-Console.WriteLine(c2.Count);
-c2.inc();
-Console.WriteLine(c2.Count);
 
+//Counter c1 = new Counter();//конструктор по умолчанию
+//Console.WriteLine(c1.Count);
+//c1.inc();
+//c1.inc();
+//c1.inc();
+//c1.inc();
+//Console.WriteLine(c1.Count);
+//c1.dec();
+//Console.WriteLine(c1.Count);
+//Random randon = new Random();
+//Counter c2 = new Counter(randon.Next(-10,11),-10,10);
+//Console.WriteLine(c2.Count);
+//c2.inc();
+//Console.WriteLine(c2.Count);
+
+Solution solution = new Solution();
+solution.Add(new Train { Dest = "Москва", Number = 3, TimeDep = DateTime.Parse("12:30")});
+solution.Add(new Train { Dest = "Москва", Number = 5, TimeDep = DateTime.Parse("11:30")});
+solution.Add(new Train { Dest = "Волгоград", Number = 6, TimeDep = DateTime.Parse("18:40")});
+solution.Add(new Train { Dest = "Москва", Number = 8, TimeDep = DateTime.Parse("9:15")});
+solution.Add(new Train { Dest = "Питер", Number = 1, TimeDep = DateTime.Parse("16:10")});
+solution.Print();
+Console.Write("Введите номер поезда:");
+int n = int.Parse(Console.ReadLine()!);
+solution.Find(n).Print();
+Console.WriteLine();
+solution.PrintByDest();
