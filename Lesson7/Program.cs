@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Lesson7;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 //ClassParent parent = new ClassParent(5, 9);
 //Console.WriteLine(parent.getX);
@@ -25,9 +27,20 @@ Console.WriteLine(group[4].getScholarship());
 
 //Console.WriteLine(maksAspirant!.getScholarship());
 
+List<Animal> animals = new List<Animal>();
+animals.Add(new Tiger());
+animals.Add(new Antilopa());
+animals[0].Eat(300);
+animals[1].Eat(100);
 
-
-
+for(int i = 0; i < animals.Count - 1; i++)
+{
+    for(int j = i + 1; j < animals.Count; j++)
+    {
+        if (animals[i].EatMassa > animals[j].EatMassa)
+            (animals[i], animals[j]) = (animals[j], animals[i]);
+    }
+}
 class ClassParent
 {
     private int x;
