@@ -1,5 +1,6 @@
 ﻿using Lesson7;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 //ClassParent parent = new ClassParent(5, 9);
@@ -7,20 +8,20 @@ using System.Runtime.CompilerServices;
 //Child child = new Child(6);
 //Console.WriteLine(child.getX);
 
-Student vasia = new Student("Иванов", "Василий","21ПОБ12",4.5);
-Console.WriteLine(vasia.getScholarship());
-Aspirant borya = new Aspirant("Петров", "Борис","", 5, "Геофизика");
-Console.WriteLine(borya.getScholarship());
+//Student vasia = new Student("Иванов", "Василий","21ПОБ12",4.5);
+//Console.WriteLine(vasia.getScholarship());
+//Aspirant borya = new Aspirant("Петров", "Борис","", 5, "Геофизика");
+//Console.WriteLine(borya.getScholarship());
 
-Student[] group = new Student[5];
-group[0] = vasia;
-group[1] = borya;
-group[2] = new Student("Федоров", "Илья","22ПОБ27", 4.9);
-Student sam = new Aspirant("Сидоров","Сам","",3.8,"Биология");//восходящее преобразование
-group[3] = sam;
-Student maks = new Student("Планк", "Макс","",5);
-group[4] = maks;
-Console.WriteLine(group[4].getScholarship());
+//Student[] group = new Student[5];
+//group[0] = vasia;
+//group[1] = borya;
+//group[2] = new Student("Федоров", "Илья","22ПОБ27", 4.9);
+//Student sam = new Aspirant("Сидоров","Сам","",3.8,"Биология");//восходящее преобразование
+//group[3] = sam;
+//Student maks = new Student("Планк", "Макс","",5);
+//group[4] = maks;
+//Console.WriteLine(group[4].getScholarship());
 ////нисходящее
 //Aspirant? maksAspirant = (Aspirant)maks;
 //maksAspirant!.ScientistWork = "Химия";
@@ -28,12 +29,23 @@ Console.WriteLine(group[4].getScholarship());
 //Console.WriteLine(maksAspirant!.getScholarship());
 
 List<Animal> animals = new List<Animal>();
-animals.Add(new Tiger());
-animals.Add(new Antilopa());
-animals[0].Eat(300);
-animals[1].Eat(100);
+//animals.Add(new Tiger());
+//animals.Add(new Antilopa());
+//animals[0].Eat(300);
+//animals[1].Eat(100);
 
-for(int i = 0; i < animals.Count - 1; i++)
+using (BinaryReader reader = new BinaryReader(File.Open("animal.dat", FileMode.Open)))
+{
+    while (reader.PeekChar() > -1)
+    {
+        double eatMassa = reader.ReadDouble();
+        Animal animal = new Tiger();
+        animal.EatMassa = eatMassa;
+        animals.Add(animal);
+    }
+}
+
+for (int i = 0; i < animals.Count - 1; i++)
 {
     for(int j = i + 1; j < animals.Count; j++)
     {
@@ -41,6 +53,17 @@ for(int i = 0; i < animals.Count - 1; i++)
             (animals[i], animals[j]) = (animals[j], animals[i]);
     }
 }
+foreach(Animal an in animals)
+    Console.WriteLine(an.EatMassa);
+//using (BinaryWriter writer = new BinaryWriter(File.Open("animal.dat", FileMode.OpenOrCreate)))
+//{
+//    foreach (Animal person in animals)
+//    {
+//        writer.Write(person.EatMassa);
+//    }
+//}
+
+
 class ClassParent
 {
     private int x;
