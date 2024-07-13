@@ -25,6 +25,19 @@ namespace Lesson12
                 }
             }
         }
+        public int findTask(string name)
+        {
+            int i = 0;
+            foreach (var task in Tasks)
+            {
+                if (task.Name == name)
+                {
+                    return i;
+                }
+                i++;
+            }
+            return -1;
+        }
         public void AddEvent(Event @event)=>Events.Add(@event);
 
 
