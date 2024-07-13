@@ -14,7 +14,7 @@ namespace Lesson12
         public Priority Priority { get; set; }
         public int CompareTo(Task? other)
         {
-            if (this.DueDate > other.DueDate) return 1;
+            if (this.DueDate > other!.DueDate) return 1;
             else if (this.DueDate < other.DueDate) return -1;
             else return 0;
         }
