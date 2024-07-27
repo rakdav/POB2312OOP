@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Lesson16.Console
 {
-    internal class UserRegistration
+    public class UserRegistration
     {
         private List<User>? users;
-        private const string path= "C:\\Users\\R2NBT\\source\\users.json";
+        private const string path= "C:\\Share\\users.json";
 
         public UserRegistration()
         {
@@ -43,6 +43,12 @@ namespace Lesson16.Console
                 SerializeUsersToJson(users, path);
                 return true;
             }
+        }
+        public bool AuthenticateUser(string username,string password)
+        {
+            User realUser = users!.FirstOrDefault(p => p.UserName == username && p.Password == password)!;
+            if (realUser != null) return true;
+            return false;
         }
         private async void SerializeUsersToJson(List<User> users,string fileName)
         {
