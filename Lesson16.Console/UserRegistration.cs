@@ -10,7 +10,7 @@ namespace Lesson16.Console
     internal class UserRegistration
     {
         private List<User>? users;
-        private const string path= "C:\\Share\\users.json";
+        private const string path= "C:\\Users\\R2NBT\\source\\users.json";
 
         public UserRegistration()
         {
@@ -21,7 +21,12 @@ namespace Lesson16.Console
         {
             using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
-                users = await JsonSerializer.DeserializeAsync<List<User>>(fs);
+                try
+                {
+                    List<User>? userList = await JsonSerializer.DeserializeAsync<List<User>>(fs);
+                    users = userList;
+                }
+                catch { }
             }
         }
         public bool RegisterUser(User user)
@@ -33,7 +38,7 @@ namespace Lesson16.Console
             }
             else
             {
-                user.Id = users!.Count;
+                user.Id = users!.Count+1;
                 users.Add(user);
                 SerializeUsersToJson(users, path);
                 return true;
@@ -41,15 +46,19 @@ namespace Lesson16.Console
         }
         private async void SerializeUsersToJson(List<User> users,string fileName)
         {
-            string json = JsonSerializer.Serialize(users);
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
                 await JsonSerializer.SerializeAsync(fs, users);
             }
         }
-        public void Print()
+        public string Print()
         {
-            foreach (User user in users!) user.ToString();
+            string res = "";
+            foreach (User user in users!)
+            {
+                res+=user.Id+" "+user.FirstName+" "+user.Email+"\n";
+            };
+            return res;
         }
     }
 }

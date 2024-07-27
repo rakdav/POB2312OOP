@@ -4,7 +4,7 @@ do
 {
     Console.Clear();
     Console.WriteLine("Список пользователей:");
-    userRegistration.Print();
+    Console.WriteLine(userRegistration.Print());
     Console.WriteLine("Меню: 1 - Зарегистрироваться\n");
     Console.WriteLine("Выбрите пункт меню:");
     int n;
@@ -25,7 +25,11 @@ do
         DateTime dateRegister = DateTime.Parse(Console.ReadLine()!);
         Console.Write("Введите дату рождения:");
         DateTime dateBirth = DateTime.Parse(Console.ReadLine()!);
-        User user = new User(nike,name,lastName,mail,password,dateRegister,dateBirth);
-        userRegistration.RegisterUser(user);
+        User user = new User { UserName = nike,
+            FirstName = name, SecondName = lastName, Email =mail,
+            Password=password, BirthDate=dateBirth,RegistrationDate=dateRegister
+        };
+        if(userRegistration.RegisterUser(user)) Console.WriteLine("Пользователь успешно зарегистрирован!");
+        else Console.WriteLine("Пользователь с таким именем или паролем существует!");
     }
 }while(true);
